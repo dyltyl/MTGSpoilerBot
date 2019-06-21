@@ -18,6 +18,7 @@ class MTGSpoilerBot:
         for mtg_set in self.current_sets:
             if mtg_set.release_date >= current_date and mtg_set.num_of_cards > 0:
                 self.get_all_cards_in_set(mtg_set.code)
+                #Check the stored values and compare
 
     def get_all_sets(self):
         r = requests.get('https://api.scryfall.com/sets')
