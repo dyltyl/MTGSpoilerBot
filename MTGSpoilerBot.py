@@ -11,7 +11,7 @@ class MTGSpoilerBot:
         #Check the stored values and compare
 
     def get_all_sets(self):
-        r = requests.get('https://api.scryfall.com/sets?pretty')
+        r = requests.get('https://api.scryfall.com/sets')
         if r is None:
             print('Unable to get sets')
             return
