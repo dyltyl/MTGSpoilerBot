@@ -3,6 +3,7 @@ from flask.json import JSONEncoder
 from MTGSpoilerBot import MTGSpoilerBot
 from MTGCard import MTGCard
 from MTGSet import MTGSet
+from Database import DatabaseInstaller
 
 app = Flask(__name__)
 
@@ -44,6 +45,11 @@ def check_for_cards(mtg_set):
     bot = MTGSpoilerBot()
     bot.check_for_new_cards()
     return jsonify(bot.current_cards)
+
+@app.route("/ConfigureTables")
+def configure_tables():
+    db = DatabaseInstaller()
+    db.setup_tables()
 
 
 
