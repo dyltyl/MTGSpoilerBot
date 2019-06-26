@@ -6,6 +6,7 @@ class DatabaseInstaller:
     def __init__(self):
         print('Connecting to db')
         parts = os.environ['DATABASE_URL'].split(":")
+        print(os.environ['DATABASE_URL'])
         self.username = parts[1][2:]
         self.password = parts[2][0:parts[2].index("@")]
         self.database = parts[3][parts[3].index("/") + 1:]
@@ -49,7 +50,7 @@ class DatabaseInstaller:
             print(tablename + ' needs updating')
 
     def setup_tables(self):
-        self.start_db()
+        #self.start_db()
         self.create_table('MTG_Set', self.path+'/MTG_Set.sql')
         self.create_table('Cards', self.path + '/Cards.sql')
 
