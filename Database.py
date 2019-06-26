@@ -9,7 +9,7 @@ class DatabaseInstaller:
         print(os.environ['DATABASE_URL'])
         self.username = parts[1][2:]
         self.password = parts[2][0:parts[2].index("@")]
-        self.host = parts[2][parts[2].index('@')]
+        self.host = parts[2][parts[2].index('@')+1:]
         self.port = parts[3][0:parts[3].index('/')]
         self.database = parts[3][parts[3].index("/") + 1:]
         self.path = os.path.realpath(__file__)
