@@ -19,6 +19,9 @@ class DatabaseInstaller:
         print('database: ' + self.database)
         print('path: ' + self.path)
 
+    def start_db(self):
+        os.system('service postgresql start')
+
     def connect_to_database(self): #Todo: add null checks/etc
         return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password)
 
@@ -46,6 +49,7 @@ class DatabaseInstaller:
             print(tablename + ' needs updating')
 
     def setup_tables(self):
+        self.start_db()
         self.create_table('MTG_Set', self.path+'/MTG_Set.sql')
         self.create_table('Cards', self.path + '/Cards.sql')
 
