@@ -4,6 +4,7 @@ import os
 
 class DatabaseInstaller:
     def __init__(self):
+        print('Connecting to db')
         parts = os.environ['DATABASE_URL'].split(":")
         self.username = parts[1][2:]
         self.password = parts[2][0:parts[2].index("@")]
