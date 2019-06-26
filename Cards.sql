@@ -16,6 +16,3 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
-
-ALTER TABLE public.Cards
-    OWNER to postgres;
