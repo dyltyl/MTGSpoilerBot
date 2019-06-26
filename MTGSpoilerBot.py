@@ -16,7 +16,7 @@ class MTGSpoilerBot:
     def check_for_new_cards(self):
         current_date = datetime.now().date()
         for mtg_set in self.current_sets:
-            if mtg_set.release_date >= current_date and mtg_set.num_of_cards > 0:
+            if mtg_set.release_date >= current_date and mtg_set.card_count > 0:
                 self.get_all_cards_in_set(mtg_set.code)
                 #Check the stored values and compare
 
