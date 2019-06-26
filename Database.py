@@ -9,6 +9,8 @@ class DatabaseInstaller:
         print(os.environ['DATABASE_URL'])
         self.username = parts[1][2:]
         self.password = parts[2][0:parts[2].index("@")]
+        self.host = parts[2][parts[2].index('@')]
+        self.port = parts[3][0:parts[3].index('/')]
         self.database = parts[3][parts[3].index("/") + 1:]
         self.path = os.path.realpath(__file__)
         try:
@@ -18,13 +20,15 @@ class DatabaseInstaller:
         print('username: ' + self.username)
         print('password: ' + self.password)
         print('database: ' + self.database)
+        print('host: ' + self.host)
+        print('port: ' + self.port)
         print('path: ' + self.path)
 
     def start_db(self):
         os.system('service postgresql start')
 
     def connect_to_database(self): #Todo: add null checks/etc
-        return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password)
+        return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password + " host="+self.host + " port="+self.port)
 
     def check_table_exists(self, table):
         database = self.connect_to_database()
