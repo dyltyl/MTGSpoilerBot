@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from MTGSpoilerBot import MTGSpoilerBot
 app = Flask(__name__)
 
@@ -7,12 +7,12 @@ app = Flask(__name__)
 def check_for_sets():
     bot = MTGSpoilerBot()
     bot.check_for_new_sets()
-    return bot.current_sets
+    return jsonify(bot.current_sets)
 
 
 @app.route("/CheckForCards/<mtg_set>", methods=['GET'])
 def check_for_cards(mtg_set):
     bot = MTGSpoilerBot()
     bot.check_for_new_cards()
-    return bot.current_cards
+    return jsonify(bot.current_cards)
 
