@@ -49,6 +49,7 @@ class DatabaseInstaller:
             cursor = database.cursor()
             cursor.execute(sql)
             cursor.close()
+            database.close()
         else:
             print(tablename + ' needs updating')
 
