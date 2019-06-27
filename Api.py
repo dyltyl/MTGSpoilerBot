@@ -50,8 +50,6 @@ def check_for_cards(mtg_set):
 
 @app.route("/ConfigureTables")
 def configure_tables():
-    try:
         db = DatabaseInstaller()
         db.setup_tables()
-    except psycopg2.Error as e:
-        print(e)
+        return 'nice'
