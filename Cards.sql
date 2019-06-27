@@ -1,14 +1,14 @@
-CREATE TABLE Cards
+CREATE TABLE cards
 (
-    Name character varying COLLATE pg_catalog."default" NOT NULL,
-    ReleaseDate date,
-    OracleText character varying COLLATE pg_catalog."default",
-    URL character varying COLLATE pg_catalog."default",
-    MTG_Set character varying COLLATE pg_catalog."default" NOT NULL,
-    Id character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT Cards_pkey PRIMARY KEY (Id),
-    CONSTRAINT SetLookup FOREIGN KEY (MTG_Set)
-        REFERENCES MTG_Set (Code) MATCH SIMPLE
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    release_date date,
+    oracle_text character varying COLLATE pg_catalog."default",
+    url character varying COLLATE pg_catalog."default",
+    mtg_set character varying COLLATE pg_catalog."default" NOT NULL,
+    id character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT Cards_pkey PRIMARY KEY (id),
+    CONSTRAINT SetLookup FOREIGN KEY (mtg_set)
+        REFERENCES mtg_set (code) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 )

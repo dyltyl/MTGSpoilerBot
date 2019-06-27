@@ -1,11 +1,11 @@
-CREATE TABLE MTG_Set
+CREATE TABLE mtg_set
 (
-    Name character varying COLLATE pg_catalog."default" NOT NULL,
-    Code character varying COLLATE pg_catalog."default" NOT NULL,
-    ReleaseDate date NOT NULL,
-    CardCount integer NOT NULL,
-    SetType character varying COLLATE pg_catalog."default",
-    CONSTRAINT Set_pkey PRIMARY KEY (Code)
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    code character varying COLLATE pg_catalog."default" NOT NULL,
+    release_date date NOT NULL,
+    card_count integer NOT NULL,
+    set_type character varying COLLATE pg_catalog."default",
+    CONSTRAINT Set_pkey PRIMARY KEY (code)
 )
 WITH (
     OIDS = FALSE
