@@ -53,7 +53,7 @@ class DatabaseInstaller:
     def setup_tables(self):
         #self.start_db()
         self.create_table('mtg_set', self.path+'/MTG_Set.sql')
-        print('Created MTG_Set')
+        print('Created MTG_Set', self.check_table_exists('mtg_set'))
         self.create_table('cards', self.path + '/Cards.sql')
 
     def verify_tables(self):

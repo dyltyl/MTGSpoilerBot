@@ -46,11 +46,11 @@ def check_for_cards(mtg_set):
     bot.check_for_new_cards()
     return jsonify(bot.current_cards)
 
+
 @app.route("/ConfigureTables")
 def configure_tables():
-    db = DatabaseInstaller()
-    db.setup_tables()
-
-
-
-
+    try:
+        db = DatabaseInstaller()
+        db.setup_tables()
+    except ValueError as e:
+        print('e')
