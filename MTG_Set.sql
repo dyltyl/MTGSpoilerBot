@@ -1,4 +1,4 @@
-CREATE TABLE public.MTG_Set
+CREATE TABLE MTG_Set
 (
     Name character varying COLLATE pg_catalog."default" NOT NULL,
     Code character varying COLLATE pg_catalog."default" NOT NULL,

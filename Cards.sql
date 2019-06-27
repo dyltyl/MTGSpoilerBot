@@ -1,4 +1,4 @@
-CREATE TABLE public.Cards
+CREATE TABLE Cards
 (
     Name character varying COLLATE pg_catalog."default" NOT NULL,
     ReleaseDate date,
@@ -7,8 +7,8 @@ CREATE TABLE public.Cards
     MTG_Set character varying COLLATE pg_catalog."default" NOT NULL,
     Id character varying COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT Cards_pkey PRIMARY KEY (Id),
-    CONSTRAINT SetLookup FOREIGN KEY (public.MTG_Set)
-        REFERENCES public.MTG_Set (Code) MATCH SIMPLE
+    CONSTRAINT SetLookup FOREIGN KEY (MTG_Set)
+        REFERENCES MTG_Set (Code) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 )
