@@ -25,9 +25,7 @@ class DatabaseInstaller:
         print('path: ' + self.path)
 
     def connect_to_database(self): #Todo: add null checks/etc
-        db = psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password + " host="+self.host + " port="+self.port)
-        db.autocommit = True
-        return db
+        return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password + " host="+self.host + " port="+self.port)
 
     def check_table_exists(self, table):
         database = self.connect_to_database()
@@ -48,6 +46,7 @@ class DatabaseInstaller:
             sql_file.close()
             cursor = database.cursor()
             cursor.execute(sql)
+            database.commit()
             cursor.close()
             database.close()
         else:
