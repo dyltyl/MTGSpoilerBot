@@ -4,6 +4,7 @@ from MTGSpoilerBot import MTGSpoilerBot
 from MTGCard import MTGCard
 from MTGSet import MTGSet
 from Database import DatabaseInstaller
+import psycopg2
 
 app = Flask(__name__)
 
@@ -52,5 +53,5 @@ def configure_tables():
     try:
         db = DatabaseInstaller()
         db.setup_tables()
-    except ValueError as e:
-        print('e')
+    except psycopg2.Error as e:
+        print(e)
