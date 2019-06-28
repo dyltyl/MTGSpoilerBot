@@ -9,7 +9,7 @@ import psycopg2
 app = Flask(__name__)
 
 
-class MyJSONEncoder(JSONEncoder):
+class MyJSONEncoder(JSONEncoder): #TODO: Auth
     def default(self, obj):
         if isinstance(obj, MTGCard):
             return {
@@ -44,8 +44,9 @@ def check_for_sets():
 @app.route("/CheckForCards/<mtg_set>", methods=['GET'])
 def check_for_cards(mtg_set):
     bot = MTGSpoilerBot()
-    bot.check_for_new_cards()
-    return jsonify(bot.current_cards)
+    bot.check_for_new_sets()
+    cards = bot.check_for_new_cards()
+    return jsonify(cards)
 
 
 @app.route("/test")
