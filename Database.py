@@ -71,7 +71,9 @@ class Database:
         sql = 'INSERT INTO cards (name, release_date, oracle_text, url, mtg_set, id) VALUES '
         values = []
         for card in cards:
-            values.append(format_string.format(card.name, card.release_date, card.oracle_text, card.url, card.set_name, card.id).replace("'", "''"))
+            name = card.name.replace("'", "''")
+            oracle_text = card.oracle_text.replace("'", "''")
+            values.append(format_string.format(name, card.release_date, oracle_text, card.url, card.set_name, card.id))
         sql += ', '.join(values) + ';'
         print(sql)
         cursor = database.cursor()
@@ -93,7 +95,9 @@ class Database:
               'id = c2.id FROM (VALUES'
         values = []
         for card in cards:
-            values.append(format_string.format(card.name, card.release_date, card.oracle_text, card.url, card.set_name, card.id).replace("'", "''"))
+            name = card.name.replace("'", "''")
+            oracle_text = card.oracle_text.replace("'", "''")
+            values.append(format_string.format(name, card.release_date, oracle_text, card.url, card.set_name, card.id))
         sql += ', '.join(values) + ') as c2(name, release_date, oracle_text, url, mtg_set, id) WHERE u2.id = u.id;'
         print(sql)
         cursor = database.cursor()
@@ -121,7 +125,8 @@ class Database:
         sql = 'INSERT INTO mtg_set (name, code, release_date, card_count, set_type) VALUES '
         values = []
         for mtg_set in mtg_sets:
-            values.append(format_string.format(mtg_set.name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type).replace("'", "''"))
+            name = mtg_set.name.replace("'", "''")
+            values.append(format_string.format(name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type))
         sql += ', '.join(values) + ';'
         print(sql)
         cursor = database.cursor()
@@ -143,7 +148,8 @@ class Database:
               'set_type = c2.set_type FROM (VALUES'
         values = []
         for mtg_set in mtg_sets:
-            values.append(format_string.format(mtg_set.name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type).replace("'", "''"))
+            name = mtg_set.name.replace("'", "''")
+            values.append(format_string.format(name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type))
         sql += ', '.join(values) + ') as c2(name, code, release_date, card_count, set_type) WHERE u2.code = u.code;'
         print(sql)
         cursor = database.cursor()
