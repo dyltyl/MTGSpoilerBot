@@ -7,7 +7,7 @@ class MTGSet:
         self.code = code
         if release_date is str:
             self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
-        else:
+        elif release_date is datetime:
             self.release_date = release_date
         self.card_count = card_count
         self.set_type = set_type
