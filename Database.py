@@ -26,6 +26,7 @@ class DatabaseInstaller:
         print('host: ' + self.host)
         print('port: ' + self.port)
         print('path: ' + self.path)
+        print(type(self.connect_to_database()))
 
     def connect_to_database(self): #Todo: add null checks/etc
         return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password + " host="+self.host + " port="+self.port)
@@ -58,6 +59,13 @@ class DatabaseInstaller:
         self.create_table('mtg_set', self.path+'/MTG_Set.sql')
         print('Created MTG_Set', self.check_table_exists('mtg_set'))
         self.create_table('cards', self.path + '/Cards.sql')
+
+    def get_cards_from_set(self, mtg_set: str):
+        database = self.connect_to_database()
+        cursor = database.cursor()
+        cursor.execute('SELECT * FROM cards WHERE mtg_set = ' + mtg_set)
+        result = cursor.fetchone()
+        cursor.close()
 
     def insert_cards(self, cards: List[MTGCard]):
         if len(cards) < 1:

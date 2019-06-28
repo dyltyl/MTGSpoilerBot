@@ -48,6 +48,9 @@ def check_for_cards(mtg_set):
     return jsonify(bot.current_cards)
 
 
+@app.route("/test")
+def test():
+    DatabaseInstaller()
 # @app.route("/ConfigureTables")
 # def configure_tables():
 #         db = DatabaseInstaller()
