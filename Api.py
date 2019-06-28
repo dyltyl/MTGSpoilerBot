@@ -53,7 +53,7 @@ def test():
     bot = MTGSpoilerBot()
     bot.get_all_sets()
     db = DatabaseInstaller()
-    db.insert_sets([bot.current_sets[0]])
+    #db.insert_sets([bot.current_sets[0]])
     return jsonify(db.get_sets())
 
 # @app.route("/ConfigureTables")
