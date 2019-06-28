@@ -66,7 +66,7 @@ class DatabaseInstaller:
         if len(cards) < 1:
             return
         database = self.connect_to_database()
-        format_string = '({}, {}, {}, {}, {}, {})'
+        format_string = "('{}', '{}', '{}', '{}', '{}', '{}')"
         sql = 'INSERT INTO cards (name, release_date, oracle_text, url, mtg_set, id) VALUES '
         values = []
         for card in cards:
@@ -82,7 +82,7 @@ class DatabaseInstaller:
         if len(cards) < 1:
             return
         database = self.connect_to_database()
-        format_string = '({}, {}, {}, {}, {}, {})'
+        format_string = "('{}', '{}', '{}', '{}', '{}', '{}')"
         sql = 'UPDATE cards as c SET ' \
               'name = c2.name, ' \
               'release_date = c2.release_date,' \
@@ -115,7 +115,7 @@ class DatabaseInstaller:
         if len(mtg_sets) < 1:
             return
         database = self.connect_to_database()
-        format_string = '({}, {}, {}, {}, {})'
+        format_string = "('{}', '{}', '{}', '{}', '{}')"
         sql = 'INSERT INTO mtg_set (name, code, release_date, card_count, set_type) VALUES '
         values = []
         for mtg_set in mtg_sets:
@@ -132,7 +132,7 @@ class DatabaseInstaller:
             return
         database = self.connect_to_database()
         print(type(database))
-        format_string = '({}, {}, {}, {}, {})'
+        format_string = "('{}', '{}', '{}', '{}', '{}')"
         sql = 'UPDATE cards as c SET ' \
               'name = c2.name, ' \
               'code = c2.code, ' \
