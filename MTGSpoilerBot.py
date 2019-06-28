@@ -42,7 +42,7 @@ class MTGSpoilerBot:
 
 
     @staticmethod
-    def get_all_sets() -> List[MTGSet]:
+    def get_all_sets():
         r = requests.get('https://api.scryfall.com/sets')
         if r is None:
             print('Unable to get sets')
@@ -53,7 +53,7 @@ class MTGSpoilerBot:
         return mtg_sets
 
     @staticmethod
-    def get_all_cards_in_set(set_code) -> List[MTGCard]:
+    def get_all_cards_in_set(set_code):
         r = requests.get('https://api.scryfall.com/cards/search?order=released&q=e%3A' + set_code + '&unique=prints')
         if r is None:
             print('Unable to get cards in: ' + set_code)
