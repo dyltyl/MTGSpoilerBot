@@ -30,7 +30,7 @@ class MTGSpoilerBot:
 
     def check_for_new_cards(self):
         new_cards = []
-        print('There are ' + len(self.current_sets) + ' in the db')
+        print('There are ' + str(len(self.current_sets)) + ' in the db')
         for mtg_set in self.current_sets:
             if mtg_set.release_date >= self.current_date and mtg_set.card_count > 0:
                 scryfall_cards = self.get_all_cards_in_set(mtg_set.code)
