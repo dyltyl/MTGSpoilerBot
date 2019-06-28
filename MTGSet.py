@@ -5,10 +5,10 @@ class MTGSet:
     def __init__(self, name: str, code: str, release_date, card_count: int, set_type: str):
         self.name = name
         self.code = code
-        if release_date is str:
-            self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
-        elif release_date is datetime:
+        if release_date is datetime:
             self.release_date = release_date
+        else:
+            self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
         self.card_count = card_count
         self.set_type = set_type
 
