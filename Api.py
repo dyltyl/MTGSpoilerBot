@@ -50,7 +50,12 @@ def check_for_cards(mtg_set):
 
 @app.route("/test")
 def test():
-    DatabaseInstaller()
+    bot = MTGSpoilerBot()
+    bot.get_all_sets()
+    db = DatabaseInstaller()
+    db.insert_sets([bot.current_sets[0]])
+    return jsonify(db.get_sets())
+
 # @app.route("/ConfigureTables")
 # def configure_tables():
 #         db = DatabaseInstaller()

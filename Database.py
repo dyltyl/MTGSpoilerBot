@@ -3,13 +3,12 @@ import os
 from MTGSet import MTGSet
 from MTGCard import MTGCard
 from typing import List
+from psycopg2.extensions import connection
 
 
 class DatabaseInstaller:
     def __init__(self):
-        print('Connecting to db')
         parts = os.environ['DATABASE_URL'].split(":")
-        print(os.environ['DATABASE_URL'])
         self.username = parts[1][2:]
         self.password = parts[2][0:parts[2].index("@")]
         self.host = parts[2][parts[2].index('@')+1:]
@@ -20,15 +19,8 @@ class DatabaseInstaller:
             self.path = self.path[0:self.path.rindex('/')]
         except ValueError:
             self.path = self.path[0:self.path.rindex('\\')]
-        print('username: ' + self.username)
-        print('password: ' + self.password)
-        print('database: ' + self.database)
-        print('host: ' + self.host)
-        print('port: ' + self.port)
-        print('path: ' + self.path)
-        print(type(self.connect_to_database()))
 
-    def connect_to_database(self): #Todo: add null checks/etc
+    def connect_to_database(self) -> connection: #Todo: add null checks/etc
         return psycopg2.connect("dbname="+self.database+" user="+self.username+" password="+self.password + " host="+self.host + " port="+self.port)
 
     def check_table_exists(self, table: str) -> bool:
@@ -57,15 +49,18 @@ class DatabaseInstaller:
 
     def setup_tables(self):
         self.create_table('mtg_set', self.path+'/MTG_Set.sql')
-        print('Created MTG_Set', self.check_table_exists('mtg_set'))
         self.create_table('cards', self.path + '/Cards.sql')
 
-    def get_cards_from_set(self, mtg_set: str):
+    def get_cards_from_set(self, mtg_set: str) -> List[MTGCard]:
         database = self.connect_to_database()
         cursor = database.cursor()
         cursor.execute('SELECT * FROM cards WHERE mtg_set = ' + mtg_set)
-        result = cursor.fetchone()
+        rows = cursor.fetchall()
         cursor.close()
+        cards = []
+        for row in rows:
+            cards.append(MTGCard(row['name'], row['release_date'], row['oracle_text'], row['url'], row['mtg_set'], row[id]))
+        return cards
 
     def insert_cards(self, cards: List[MTGCard]):
         if len(cards) < 1:
@@ -104,6 +99,17 @@ class DatabaseInstaller:
         cursor.execute(sql)
         database.commit()
         cursor.close()
+
+    def get_sets(self) -> List[MTGSet]:
+        database = self.connect_to_database()
+        cursor = database.cursor()
+        cursor.execute('SELECT * FROM mtg_set') #TODO: Add limitation on release date
+        rows = cursor.fetchall()
+        cursor.close()
+        mtg_sets = []
+        for row in rows:
+            mtg_sets.append(MTGSet(row['name'], row['code'], row['release_date'], row['card_count']))
+        return mtg_sets
 
     def insert_sets(self, mtg_sets: List[MTGSet]):
         if len(mtg_sets) < 1:
