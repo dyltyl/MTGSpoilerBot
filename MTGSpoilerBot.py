@@ -38,6 +38,8 @@ class MTGSpoilerBot:
                     for card in scryfall_cards:
                         if card not in db_cards:
                             new_cards.append(card)
+            else:
+                print(mtg_set.code + ' not a current set')
         self.database.insert_cards(new_cards)
         return new_cards
 
