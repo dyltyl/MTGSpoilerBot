@@ -24,6 +24,8 @@ class MTGSpoilerBot:
                     new_sets.append(mtg_set)
                 if mtg_set.release_date >= self.current_date:
                     self.current_sets.append(mtg_set)
+                else:
+                    print('Set:',mtg_set.code,'<',self.current_date)
             self.database.insert_sets(new_sets)
             return new_sets
         return []
