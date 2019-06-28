@@ -1,10 +1,13 @@
-from datetime import datetime
+from datetime import datetime, date
 
 
 class MTGCard:
     def __init__(self, name, release_date, oracle_text, set_name, url, id):
         self.name = name
-        self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
+        if isinstance(release_date, date):
+            self.release_date = release_date
+        else:
+            self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
         self.oracle_text = oracle_text
         self.set_name = set_name
         self.url = url

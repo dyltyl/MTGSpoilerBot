@@ -3,7 +3,7 @@ from flask.json import JSONEncoder
 from MTGSpoilerBot import MTGSpoilerBot
 from MTGCard import MTGCard
 from MTGSet import MTGSet
-from Database import DatabaseInstaller
+from Database import Database
 import psycopg2
 
 app = Flask(__name__)
@@ -52,7 +52,7 @@ def check_for_cards(mtg_set):
 def test():
     bot = MTGSpoilerBot()
     bot.get_all_sets()
-    db = DatabaseInstaller()
+    db = Database()
     #db.insert_sets([bot.current_sets[0]])
     return jsonify(db.get_sets())
 

@@ -6,7 +6,7 @@ from typing import List
 from psycopg2.extensions import connection
 
 
-class DatabaseInstaller:
+class Database:
     def __init__(self):
         parts = os.environ['DATABASE_URL'].split(":")
         self.username = parts[1][2:]
@@ -104,7 +104,7 @@ class DatabaseInstaller:
     def get_sets(self) -> List[MTGSet]:
         database = self.connect_to_database()
         cursor = database.cursor()
-        cursor.execute('SELECT * FROM mtg_set') #TODO: Add limitation on release date
+        cursor.execute('SELECT * FROM mtg_set')
         rows = cursor.fetchall()
         cursor.close()
         mtg_sets = []
