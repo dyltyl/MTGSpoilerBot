@@ -109,7 +109,8 @@ class DatabaseInstaller:
         cursor.close()
         mtg_sets = []
         for row in rows:
-            mtg_sets.append(MTGSet(row[0], row[1], row[2], row[3]))
+            print(row)
+            mtg_sets.append(MTGSet(row[0], row[1], row[2], row[3], row[4]))
         return mtg_sets
 
     def insert_sets(self, mtg_sets: List[MTGSet]):
