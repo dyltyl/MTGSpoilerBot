@@ -1,11 +1,11 @@
-from datetime import datetime
+from datetime import datetime, date
 
 
 class MTGSet:
     def __init__(self, name: str, code: str, release_date, card_count: int, set_type: str):
         self.name = name
         self.code = code
-        if release_date is datetime:
+        if release_date is date:
             self.release_date = release_date
         else:
             self.release_date = datetime.strptime(release_date, '%Y-%m-%d').date()
