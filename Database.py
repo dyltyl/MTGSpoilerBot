@@ -59,7 +59,6 @@ class Database:
         cursor.close()
         cards = []
         for row in rows:
-            print(row)
             cards.append(MTGCard(row[0], row[1], row[2], row[3], row[4], row[5]))
         return cards
 
@@ -75,7 +74,6 @@ class Database:
             oracle_text = card.oracle_text.replace("'", "''")
             values.append(format_string.format(name, card.release_date, oracle_text, card.url, card.set_name, card.id))
         sql += ', '.join(values) + 'ON CONFLICT ON CONSTRAINT Cards_pkey DO NOTHING;'
-        print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
         database.commit()
@@ -99,7 +97,6 @@ class Database:
             oracle_text = card.oracle_text.replace("'", "''")
             values.append(format_string.format(name, card.release_date, oracle_text, card.url, card.set_name, card.id))
         sql += ', '.join(values) + ') as c2(name, release_date, oracle_text, url, mtg_set, id) WHERE u2.id = u.id;'
-        print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
         database.commit()
@@ -113,7 +110,6 @@ class Database:
         cursor.close()
         mtg_sets = []
         for row in rows:
-            print(row)
             mtg_sets.append(MTGSet(row[0], row[1], row[2], row[3], row[4]))
         return mtg_sets
 
@@ -128,7 +124,6 @@ class Database:
             name = mtg_set.name.replace("'", "''")
             values.append(format_string.format(name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type))
         sql += ', '.join(values) + 'ON CONFLICT ON CONSTRAINT Set_pkey DO NOTHING;'
-        print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
         database.commit()
@@ -138,7 +133,6 @@ class Database:
         if len(mtg_sets) < 1:
             return
         database = self.connect_to_database()
-        print(type(database))
         format_string = "('{}', '{}', '{}', '{}', '{}')"
         sql = 'UPDATE cards as c SET ' \
               'name = c2.name, ' \
@@ -151,7 +145,6 @@ class Database:
             name = mtg_set.name.replace("'", "''")
             values.append(format_string.format(name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type))
         sql += ', '.join(values) + ') as c2(name, code, release_date, card_count, set_type) WHERE u2.code = u.code;'
-        print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
         database.commit()
