@@ -5,6 +5,7 @@ class MTGSet:
     def __init__(self, name: str, code: str, release_date, card_count: int, set_type: str):
         self.name = name
         self.code = code
+        print(type(release_date))
         if release_date is date:
             self.release_date = release_date
         else:
