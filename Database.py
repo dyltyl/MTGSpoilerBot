@@ -74,7 +74,7 @@ class Database:
             name = card.name.replace("'", "''")
             oracle_text = card.oracle_text.replace("'", "''")
             values.append(format_string.format(name, card.release_date, oracle_text, card.url, card.set_name, card.id))
-        sql += ', '.join(values) + ';'
+        sql += ', '.join(values) + 'ON CONFLICT ON CONSTRAINT Cards_pkey DO NOTHING;'
         print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
@@ -127,7 +127,7 @@ class Database:
         for mtg_set in mtg_sets:
             name = mtg_set.name.replace("'", "''")
             values.append(format_string.format(name, mtg_set.code, mtg_set.release_date, mtg_set.card_count, mtg_set.set_type))
-        sql += ', '.join(values) + ';'
+        sql += ', '.join(values) + 'ON CONFLICT ON CONSTRAINT Set_pkey DO NOTHING;'
         print(sql)
         cursor = database.cursor()
         cursor.execute(sql)
