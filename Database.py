@@ -59,7 +59,8 @@ class DatabaseInstaller:
         cursor.close()
         cards = []
         for row in rows:
-            cards.append(MTGCard(row['name'], row['release_date'], row['oracle_text'], row['url'], row['mtg_set'], row[id]))
+            print(row)
+            cards.append(MTGCard(row[0], row[1], row[2], row[3], row[4], row[5]))
         return cards
 
     def insert_cards(self, cards: List[MTGCard]):
@@ -108,7 +109,7 @@ class DatabaseInstaller:
         cursor.close()
         mtg_sets = []
         for row in rows:
-            mtg_sets.append(MTGSet(row['name'], row['code'], row['release_date'], row['card_count']))
+            mtg_sets.append(MTGSet(row[0], row[1], row[2], row[3]))
         return mtg_sets
 
     def insert_sets(self, mtg_sets: List[MTGSet]):
